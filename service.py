@@ -1,31 +1,32 @@
 from __future__ import annotations
 
 import json
+import typing as t
 from pathlib import Path
 
 import bentoml
+from bentoml.validators import ContentType
+
+Image = t.Annotated[Path, ContentType("image/*")]
 
 YOLO_MODEL = "yolov8n.pt"
 
 
-@bentoml.service(resources={"gpu": 1})
-class YoloService:
+@bentoml.service
+class YoloV8:
     def __init__(self):
         from ultralytics import YOLO
 
         self.model = YOLO(YOLO_MODEL)
 
     @bentoml.api(batchable=True)
-    def predict(self, images: list[Path]) -> list[str]:
+    def predict(self, images: list[Image]) -> list[list[dict]]:
         results = self.model.predict(source=images)
-        return [result.tojson() for result in results]
-
-
-@bentoml.service
-class YoloV8:
-    yolo = bentoml.depends(YoloService)
+        return [json.loads(result.tojson()) for result in results]
 
     @bentoml.api
-    def predict(self, image: Path) -> list[dict]:
-        result = self.yolo.predict([image])[0]
-        return json.loads(result)
+    def render(self, image: Image) -> Image:
+        result = self.model.predict(image)[0]
+        output = image.parent.joinpath(f"{image.stem}_result{image.suffix}")
+        result.save(str(output))
+        return output

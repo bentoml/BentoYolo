@@ -1,1 +1,3 @@
 yolo*.pt
+.venv/
+*.py[cod]

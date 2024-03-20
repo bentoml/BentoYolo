@@ -4,8 +4,6 @@ labels:
   stage: demo
 include:
  - "*.py"
-exclude:
- - "*.pt"
 python:
   requirements_txt: "./requirements.txt"
 docker:
