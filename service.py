@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import typing as t
 from pathlib import Path
 
@@ -9,15 +10,15 @@ from bentoml.validators import ContentType
 
 Image = t.Annotated[Path, ContentType("image/*")]
 
-YOLO_MODEL = "yolov8n.pt"
-
 
 @bentoml.service(resources={"gpu": 1})
 class YoloV8:
     def __init__(self):
         from ultralytics import YOLO
 
-        self.model = YOLO(YOLO_MODEL)
+        yolo_model = os.getenv("YOLO_MODEL", "yolov8x.pt")
+
+        self.model = YOLO(yolo_model)
 
     @bentoml.api(batchable=True)
     def predict(self, images: list[Image]) -> list[list[dict]]:
