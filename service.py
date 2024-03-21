@@ -12,7 +12,7 @@ Image = t.Annotated[Path, ContentType("image/*")]
 YOLO_MODEL = "yolov8n.pt"
 
 
-@bentoml.service
+@bentoml.service(resources={"gpu": 1})
 class YoloV8:
     def __init__(self):
         from ultralytics import YOLO
