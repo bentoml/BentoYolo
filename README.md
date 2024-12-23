@@ -4,7 +4,7 @@
 
 YOLO (You Only Look Once) is a series of popular convolutional neural network (CNN) models used for object detection tasks.
 
-This is a BentoML example project, demonstrating how to build an object detection inference API server, using the [YOLOv8 model](https://huggingface.co/Ultralytics/YOLOv8). See [here](https://github.com/bentoml/BentoML/tree/main/examples) for a full list of BentoML example projects.
+This is a BentoML example project, demonstrating how to build an object detection inference API server, using the [YOLOv8 model](https://huggingface.co/Ultralytics/YOLOv8). See [here](https://docs.bentoml.com/en/latest/examples/overview.html) for a full list of BentoML example projects.
 
 ## Install dependencies
 
