@@ -11,10 +11,10 @@ from bentoml.validators import ContentType
 Image = t.Annotated[Path, ContentType("image/*")]
 
 image = bentoml.images.Image(python_version='3.11', lock_python_packages=False) \
-    .system_packages('libglib2.0-0', 'libsm6', 'libxext6', 'libxrender1') \
+    .system_packages('libglib2.0-0', 'libsm6', 'libxext6', 'libxrender1', 'libgl1-mesa-glx') \
     .requirements_file('requirements.txt')
 
-@bentoml.service(resources={"gpu": 1})
+@bentoml.service(resources={"gpu": 1}, image=image)
 class YoloService:
     def __init__(self):
         from ultralytics import YOLO
