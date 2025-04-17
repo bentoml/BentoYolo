@@ -1,2 +1,2 @@
 ultralytics>=8.1
-bentoml>=1.2.7
+bentoml>=1.4.10
