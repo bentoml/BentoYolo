@@ -55,12 +55,18 @@ with bentoml.SyncHTTPClient("http://localhost:3000") as client:
 
 After the Service is ready, you can deploy the application to BentoCloud for better management and scalability. [Sign up](https://www.bentoml.com/) if you haven't got a BentoCloud account.
 
-Make sure you have [logged in to BentoCloud](https://docs.bentoml.com/en/latest/bentocloud/how-tos/manage-access-token.html), then run the following command to deploy it.
+Make sure you have [logged in to BentoCloud](https://docs.bentoml.com/en/latest/scale-with-bentocloud/manage-api-tokens.html).
 
 ```bash
-bentoml deploy .
+bentoml cloud login
+```
+
+Deploy it by running:
+
+```bash
+bentoml deploy
 ```
 
 Once the application is up and running on BentoCloud, you can access it via the exposed URL.
 
-**Note**: For custom deployment in your own infrastructure, use [BentoML to generate an OCI-compliant image](https://docs.bentoml.com/en/latest/guides/containerization.html).
+**Note**: For custom deployment in your own infrastructure, use [BentoML to generate an OCI-compliant image](https://docs.bentoml.com/en/latest/get-started/packaging-for-deployment.html).
